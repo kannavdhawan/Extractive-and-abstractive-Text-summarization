@@ -25,6 +25,7 @@ clean_text = re.sub(r'\s+',' ',clean_text)
 sentences = nltk.sent_tokenize(clean_text)
 # making the dict for word count and calculating the weighted histogram 
 word_count=dict()
+
 tokenized_words=nltk.word_tokenize(clean_text)
 for word in tokenized_words:
     if word not in stop_words:
