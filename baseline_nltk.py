@@ -5,6 +5,7 @@ import re
 import nltk
 import heapq 
 import matplotlib.pyplot as plt
+import Word
 nltk.download('punkt')
 nltk.download('stopwords')
 stop_words = nltk.corpus.stopwords.words('english')
@@ -40,6 +41,17 @@ for word in word_count.keys():
     word_count[word]=word_count[word]/maximum
 print(word_count)
 
+# Create and generate a word cloud image:
+wordcloud = WordCloud().generate(word_count)
+
+# Display the generated image:
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+plt.show()
+
+
+
+plt.savefig('word_count.png')
 
 # url_topull = input('Enter t`he Wikipedia URL to pull - ')
 # sent_num = int(input('How many sentences long do you want your summary to be? (min recommended =10) '))
