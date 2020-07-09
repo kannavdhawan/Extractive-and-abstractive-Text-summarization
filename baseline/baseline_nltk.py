@@ -1,5 +1,7 @@
 import urllib.request  
 import re
+import bs4 as bs  
+
 # remove \n check results by printing everything.
 import nltk
 import heapq 
@@ -38,51 +40,53 @@ for i in range(len(all_files)):
     elif i==4:
         topic='tech/'
     for j in all_files[i]:
-        with open(os.path.join('bbc_news_corpus/Articles/',topic,j),'r') as f:
-            article_text=f.read().encode('utf-8').strip()
-            # print(article_text)
-        art_per_topic.append(article_text)
-        f.close()
+        with open(os.path.join('bbc_news_corpus/Articles/',topic,j),'rb') as f:                   #converted into bytes because of non ascii 
+            data=f.read() 
+            f.close()
+            soup=bs.BeautifulSoup(data,'lxml')
+            text = ""
+            for paragraph in soup.find_all('p'):
+                text += paragraph.text
+        art_per_topic.append(text)
+        print(True)
     all_articles.append(art_per_topic)
-print("*********************************************************************************")
-# for topic in all_articles:
-#     # processed_article=[]
-#     for article in topic:
-        
-#         print(1)
-#         # print("***************************************************************************************************************************************")
-    #     print(article)
-    #     break
-    # break
-        # temp_text_lower= article.lower()
-        # # clean_text = re.sub(r'\[[0-9]*\]',' ',temp_text_lower)
+count=0
+icount=0
+for topic in all_articles:
+    # processed_article=[]
+    for article in topic:
+        temp_text_lower= article.lower()
+        # clean_text = re.sub(r'\[[0-9]*\]',' ',temp_text_lower)
         # clean_text = re.sub(r'(\n+)','.',temp_text_lower)
-        # clean_text = re.sub(r'\s+','.',temp_text_lower)
+        clean_text = re.sub('[^a-zA-Z0-9.]', ' ', temp_text_lower )  
+        clean_text = re.sub(r'\s+',' ',clean_text)
         
-#         sentences= nltk.sent_tokenize(clean_text)
+        sentences= nltk.sent_tokenize(clean_text)
         
-#         word_count=dict()
-#         tokenized_words=nltk.word_tokenize(clean_text)
-#         for word in tokenized_words:
-#             if word not in stop_words:
-#                 if word not in word_count.keys():
-#                     word_count[word]=1
-#                 else:
-#                     word_count[word]+=1
-#         maximum=max(word_count.values())
-#         for word in word_count.keys():
-#             word_count[word]=word_count[word]/maximum
+        word_count=dict()
+        tokenized_words=nltk.word_tokenize(clean_text)
+        for word in tokenized_words:
+            if word not in stop_words:
+                if word not in word_count.keys():
+                    word_count[word]=1
+                else:
+                    word_count[word]+=1
+        maximum=max(word_count.values())
+        for word in word_count.keys():
+            word_count[word]=word_count[word]/maximum
 
-#         sent_score=dict()
-#         for sent in sentences:      
-#             tokens_per_sent=nltk.word_tokenize(sent)   
-#             for word in tokens_per_sent: 
-#                 if word in word_count.keys():
-#                     if sent not in sent_score:
-#                         sent_score[sent]=word_count[word]
-#                     else:
-#                         sent_score[sent]+=word_count[word] 
-#         top_sent= heapq.nlargest(sum_length,sent_score,key=sent_score.get)
-#         summary = ' '.join(top_sent) 
-#         print(summary)
+        sent_score=dict()
+        for sent in sentences:      
+            tokens_per_sent=nltk.word_tokenize(sent)   
+            for word in tokens_per_sent: 
+                if word in word_count.keys():
+                    if sent not in sent_score:
+                        sent_score[sent]=word_count[word]
+                    else:
+                        sent_score[sent]+=word_count[word] 
+        top_sent= heapq.nlargest(sum_length,sent_score,key=sent_score.get)
+        summary = ' '.join(top_sent) 
+        if count<1:
+            print(summary)
+            count+=1
 
