@@ -13,6 +13,7 @@ nltk.download('stopwords')
 
 stop_words = nltk.corpus.stopwords.words('english')
 sum_length=5
+print("Reading files..")
 def files_read(path):
     # files_per_topic=[]
     _, _, filenames = next(walk(path), (None, None, []))
@@ -27,7 +28,6 @@ for topic in ['business','entertainment','politics','sport','tech']:
 
 all_articles=[]
 for i in range(len(all_file_names)):
-    # print(i)
     art_per_topic=[]
     if i==0:
         topic='business/'
@@ -50,7 +50,7 @@ for i in range(len(all_file_names)):
         art_per_topic.append(text)
         # print(True)
     all_articles.append(art_per_topic)
-
+print("preprocessing..")
 count=0
 summaries=[]
 for topic in all_articles:
@@ -90,9 +90,8 @@ for topic in all_articles:
         summary = ' '.join(top_sent) 
         sum_per_topic.append(summary)
     summaries.append(sum_per_topic)
+print("writing summaries..")
 for i in range(len(summaries)):
-    # print(i)
-    art_per_topic=[]
     if i==0:
         topic='business/'
     elif i==1:
@@ -103,11 +102,9 @@ for i in range(len(summaries)):
         topic='sport/'
     elif i==4:
         topic='tech/'
-
-    for summ in topic:
-        with open(os.path.join("Nltk_summaries/",topic,)
-        
-        # if count<1:
-        #     print(summary)
-        #     count+=1
-
+    for n_file,n_summ in zip(all_file_names[i],summaries[i]):
+        if not os.path.exists(os.path.join("Nltk_summaries/",topic)):
+            os.makedirs(os.path.join("Nltk_summaries/",topic))
+        with open(os.path.join("Nltk_summaries/",topic,n_file),'w') as f:
+            f.write(n_summ)
+            f.close()
