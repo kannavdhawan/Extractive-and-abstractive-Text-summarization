@@ -56,6 +56,7 @@ def main(ref_summary_path,hyp_summary_path):
     all_file_names=get_filenames(True)
     """
     Self precision and recall..
+    Reading the hypothesis summary and the reference summary.
     """
     ref_sum_list=read_text(all_file_names,ref_summary_path,testing_flag=True)
     hyp_sum_list=read_text(all_file_names,hyp_summary_path,testing_flag=True)
@@ -64,13 +65,26 @@ def main(ref_summary_path,hyp_summary_path):
     print("Average precision of Business summaries: ",sum(precision[0][:])/len(precision[0][:]))
     print("Average recall of Business summaries: ",sum(recall[0][:])/len(recall[0][:]))
 
+    print("Average precision of ENtertainment summaries: ",sum(precision[1][:])/len(precision[1][:]))
+    print("Average recall of ENtertainment summaries: ",sum(recall[1][:])/len(recall[1][:]))
+
+    print("Average precision of Politics summaries: ",sum(precision[2][:])/len(precision[2][:]))
+    print("Average recall of Politics summaries: ",sum(recall[2][:])/len(recall[2][:]))
+
+    print("Average precision of Sports summaries: ",sum(precision[3][:])/len(precision[3][:]))
+    print("Average recall of Sports summaries: ",sum(recall[3][:])/len(recall[3][:]))
+
+    print("Average precision of Tech summaries: ",sum(precision[4][:])/len(precision[4][:]))
+    print("Average recall of Tech summaries: ",sum(recall[4][:])/len(recall[4][:]))
+
     """
     rouge_fpr
     """
     print("inside rouge..")
     scores=rouge_fpr(all_file_names,ref_summary_path,hyp_summary_path)
-    print("Rouge score")
+    print("Rouge score Test.. ")
     print(scores[0][0])
+    return precision,recall,scores
 
 if __name__=='__main__':
     main('bbc_news_corpus/Summaries/','Nltk_summaries/')
