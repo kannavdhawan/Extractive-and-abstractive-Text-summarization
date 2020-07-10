@@ -1,7 +1,6 @@
 import urllib.request  
 import re
 import bs4 as bs  
-# remove \n check results by printing everything.
 import nltk
 import heapq 
 import matplotlib.pyplot as plt
@@ -15,7 +14,6 @@ stop_words = nltk.corpus.stopwords.words('english')
 sum_length=5
 print("Reading files..")
 def files_read(path):
-    # files_per_topic=[]
     _, _, filenames = next(walk(path), (None, None, []))
     filenames.sort()
     files_per_topic=filenames
