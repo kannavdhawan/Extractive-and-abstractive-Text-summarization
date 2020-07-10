@@ -25,7 +25,7 @@ def main():
 if __name__=='__main__':
     main()
 
-def read_articles(all_file_names):
+def read_text(all_file_names,root_path,testing_flag):
     all_articles=[]
     for i in range(len(all_file_names)):
         art_per_topic=[]
@@ -40,19 +40,21 @@ def read_articles(all_file_names):
         elif i==4:
             topic='tech/'
         for j in all_file_names[i]:
-            with open(os.path.join('bbc_news_corpus/Articles/',topic,j),'rb') as f:                   #converted into bytes because of non ascii 
+            with open(os.path.join(root_path,topic,j),'rb') as f:                   #converted into bytes because of non ascii 
                 data=f.read() 
                 f.close()
-                soup=bs.BeautifulSoup(data,'lxml')
-                text = ""
-                for paragraph in soup.find_all('p'):
-                    text += paragraph.text
-            art_per_topic.append(text)
+                if testing_flag==False or testing_flag==True:
+                    soup=bs.BeautifulSoup(data,'lxml')
+                    text = ""
+                    for paragraph in soup.find_all('p'):
+                        text += paragraph.text
+                    data=text
+            art_per_topic.append(data)
             # print(True)
         all_articles.append(art_per_topic)
     return all_articles
 
-def get_summaries(all_articles,stop_words,sum_length):
+def set_summaries(all_articles,stop_words,sum_length):
 
     print("preprocessing..")
     count=0
@@ -94,11 +96,12 @@ def get_summaries(all_articles,stop_words,sum_length):
             summary = ' '.join(top_sent) 
             sum_per_topic.append(summary)
         summaries.append(sum_per_topic)
-        return summaries
-        
+    return summaries
+
 def write_files(all_file_names,summaries):
     print("writing summaries..")
     for i in range(len(summaries)):
+        print(i)
         if i==0:
             topic='business/'
         elif i==1:

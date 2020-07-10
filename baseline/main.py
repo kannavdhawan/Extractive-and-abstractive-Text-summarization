@@ -15,14 +15,12 @@ nltk.download('stopwords')
 stop_words = nltk.corpus.stopwords.words('english')
 sum_length=5 
 
-def main():
+def main(root_path):
     all_file_names=get_filenames(True)
-    all_articles=read_articles(all_file_names)
-    sumamries=get_summaries(all_articles,stop_words,sum_length)
+    all_articles=read_text(all_file_names,root_path,testing_flag=False)
+    summaries=set_summaries(all_articles,stop_words,sum_length)
+    print(len(summaries))
     write_files(all_file_names,summaries)
 
-    # print(all_file_names)
-
-
 if __name__ == '__main__':
-    main()
+    main('bbc_news_corpus/Articles/')
