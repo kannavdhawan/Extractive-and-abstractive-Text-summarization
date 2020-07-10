@@ -216,8 +216,7 @@ print(scores[0][0])
 
 # creating dataframe 
 
-for topic in precision:
-    for i in topic:
-
-
-precision,recall
+precision_df=pd.DataFrame((_ for _ in itertools.zip_longest(*precision)), columns=['Business', 'Entertainment', 'Politics','Sport','Tech'])
+recall_df=pd.DataFrame((_ for _ in itertools.zip_longest(*recall)), columns=['Business', 'Entertainment', 'Politics','Sport','Tech'])
+precision_df.to_csv("precision_df.csv")
+recall_df.to_csv("recall_df.csv")
