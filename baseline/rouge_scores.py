@@ -30,8 +30,8 @@ def precision_unigrams(ref_sum_list,hyp_sum_list):
 def rouge_fpr(all_file_names,ref_summary_path,hyp_summary_path):
     files_rouge = FilesRouge()
     scores=[]
+    count=0
     for ref,hyp in zip(all_file_names,all_file_names):
-        count=0
         if count==0:
             topic="business/"
         elif count==1:
@@ -43,10 +43,10 @@ def rouge_fpr(all_file_names,ref_summary_path,hyp_summary_path):
         elif count==4:
             topic="tech/"
 
-
         count+=1
         tmp=[]
         for r,h in zip(ref,hyp):
+            # print(os.path.join(ref_summary_path,topic,r))
             tmp.append(files_rouge.get_scores(os.path.join(ref_summary_path,topic,r),os.path.join(hyp_summary_path,topic,h),avg=True))
         scores.append(tmp)
         
@@ -67,8 +67,10 @@ def main(ref_summary_path,hyp_summary_path):
     """
     rouge_fpr
     """
+    print("inside rouge..")
     scores=rouge_fpr(all_file_names,ref_summary_path,hyp_summary_path)
-
+    print("Rouge score")
+    print(scores[0][0])
 
 if __name__=='__main__':
     main('bbc_news_corpus/Summaries/','Nltk_summaries/')
