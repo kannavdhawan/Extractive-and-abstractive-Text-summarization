@@ -132,12 +132,12 @@ axs.plot([0,1,2,3,4],f_score.iloc[1,:],'r',label='Rouge-2')
 axs.plot([0,1,2,3,4],f_score.iloc[2,:],'g',label='Rouge-L')
 axs.legend()
 axs.set_title("F-Score for Rouge-1, Rouge-2 and Rouge-L")
-
+plt.xlabel("Summarized Topics")
+plt.ylabel("Scores")
 axs.set_xticks([0,1,2,3,4])
 axs.set_xticklabels(["Business","Entertainment","Politics","Sports","Tech"])
-
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-axs.xlabel("Summarized Topics")
+
 # sns.lineplot([0,1,2,3,4],f_score.iloc[0,:])
 fig1.savefig('f_score.png')
 
@@ -150,7 +150,8 @@ axs.plot([0,1,2,3,4],p_score.iloc[1,:],'r',label='Rouge-2')
 axs.plot([0,1,2,3,4],p_score.iloc[2,:],'g',label='Rouge-L')
 axs.legend()
 axs.set_title("P-Score for Rouge-1, Rouge-2 and Rouge-L")
-
+plt.xlabel("Summarized Topics")
+plt.ylabel("Scores")
 axs.set_xticks([0,1,2,3,4])
 axs.set_xticklabels(["Business","Entertainment","Politics","Sports","Tech"])
 
@@ -171,7 +172,8 @@ axs.plot([0,1,2,3,4],r_score.iloc[1,:],'r',label='Rouge-2')
 axs.plot([0,1,2,3,4],r_score.iloc[2,:],'g',label='Rouge-L')
 axs.legend()
 axs.set_title("R-Score for Rouge-1, Rouge-2 and Rouge-L")
-
+plt.xlabel("Summarized Topics")
+plt.ylabel("Scores")
 axs.set_xticks([0,1,2,3,4])
 axs.set_xticklabels(["Business","Entertainment","Politics","Sports","Tech"])
 
