@@ -13,7 +13,7 @@ from baseline_nltk import *
 nltk.download('punkt')
 nltk.download('stopwords')
 stop_words = nltk.corpus.stopwords.words('english')
-sum_length=5 
+sum_length=4
 
 def main(root_path):
     all_file_names=get_filenames(True)

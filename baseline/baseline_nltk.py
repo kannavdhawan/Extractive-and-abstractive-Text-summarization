@@ -91,8 +91,11 @@ def set_summaries(all_articles,stop_words,sum_length):
             for word in word_count.keys():
                 word_count[word]=word_count[word]/maximum
             
-            sentences= nltk.sent_tokenize(clean_text)
-            print(len(sentences))
+            # clean_text=re.sub(r'\w+\\.\w+','\n',clean_text)
+            sentences=re.split('\D\\.\D', clean_text) 
+            # sentences= nltk.sent_tokenize(clean_text)
+            
+            # print(len(sentences))
             sent_score=dict()
             for sent in sentences:      
                 tokens_per_sent=nltk.word_tokenize(sent)   

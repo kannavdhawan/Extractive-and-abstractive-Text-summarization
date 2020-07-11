@@ -11,15 +11,18 @@ ROUGE-n precision=40% means that 40% of the n-grams in the generated summary are
 ROUGE-n F1-score=40% is more difficult to interpret, like any F1-score.
 """
 def precision_unigrams(ref_sum_list,hyp_sum_list):
-    
+    count_temp=0
     precision=[]
     recall=[]
     for ref,hyp in zip(ref_sum_list,hyp_sum_list):
         recall_temp=[]
         precision_temp=[]
-        for r,h in zip(ref,hyp):            
+        for r,h in zip(ref,hyp): 
+                
             r=nltk.word_tokenize(r)
             h=nltk.word_tokenize(h)
+            if len(r)<len(h):
+                count_temp+=1       
             overlap=0
             for i in h:
                 if i in r:
@@ -28,6 +31,7 @@ def precision_unigrams(ref_sum_list,hyp_sum_list):
             recall_temp.append(overlap/len(r))
         precision.append(precision_temp)
         recall.append(recall_temp)
+    print("count",count_temp)
     return precision,recall
 
 def rouge_fpr(all_file_names,ref_summary_path,hyp_summary_path):
