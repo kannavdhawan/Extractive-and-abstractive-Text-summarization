@@ -11,6 +11,12 @@ ROUGE-n precision=40% means that 40% of the n-grams in the generated summary are
 ROUGE-n F1-score=40% is more difficult to interpret, like any F1-score.
 """
 def precision_unigrams(ref_sum_list,hyp_sum_list):
+    """
+        count 539 instance for all the classses in total where the recall is more than 1. 
+        Reason being:
+        1. Sentences chosen by sentence scoring algorithm are longer than the sentences in real summary.
+        2. Static length of summary is chosen. i.e = 4. 
+    """
     count_temp=0
     precision=[]
     recall=[]
@@ -18,7 +24,6 @@ def precision_unigrams(ref_sum_list,hyp_sum_list):
         recall_temp=[]
         precision_temp=[]
         for r,h in zip(ref,hyp): 
-                
             r=nltk.word_tokenize(r)
             h=nltk.word_tokenize(h)
             if len(r)<len(h):
@@ -63,7 +68,7 @@ def main(ref_summary_path,hyp_summary_path):
     all_file_names=get_filenames(True)
     """
     Self precision and recall..
-    Reading the hypothesis summary and the reference summary.
+    Reading the hypothesis summary and the reference summary into list of list.
     """
     ref_sum_list=read_text(all_file_names,ref_summary_path,testing_flag=True)
     hyp_sum_list=read_text(all_file_names,hyp_summary_path,testing_flag=True)

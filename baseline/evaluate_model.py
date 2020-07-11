@@ -60,13 +60,23 @@ def generate_imgs(precision_path,recall_path):
         
         # plt.show()
 def calculate_mean_score(score):
-    pass
+    """
+    Input scores from Rouge 
+    Returns:
+            Mean of Precision and for Rouge-1, Rouge-2 and Rouge-L 
+            Mean of Recall for Rouge-1, Rouge-2 and Rouge-L
+            Mean of F-1 Score for Rouge-1, Rouge-2 and Rouge-L
+
+    """
+
+
 def main(ref_summary_path,hyp_summary_path):
     precision,recall,scores=rouge_scores.main(ref_summary_path,hyp_summary_path)
     
     #unigram
     precision_df=pd.DataFrame((_ for _ in itertools.zip_longest(*precision)), columns=['Business', 'Entertainment', 'Politics','Sport','Tech'])
     recall_df=pd.DataFrame((_ for _ in itertools.zip_longest(*recall)), columns=['Business', 'Entertainment', 'Politics','Sport','Tech'])
+   
     precision_path=os.path.join('Data_files/','precision_nltk.csv')
     recall_path=os.path.join('Data_files/','recall_nltk.csv')
     if not os.path.exists(os.path.join("Data_files/")):

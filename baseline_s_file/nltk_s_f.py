@@ -64,9 +64,9 @@ for topic in all_articles:
         temp_text_lower= article.lower()
         # clean_text = re.sub(r'\[[0-9]*\]',' ',temp_text_lower)
         # clean_text = re.sub(r'(\n+)','.',temp_text_lower)
-        clean_text = re.sub('[^a-zA-Z0-9.]', ' ', temp_text_lower )  
+        clean_text = re.sub(r'[^a-zA-Z0-9.%,\']', ' ', temp_text_lower)  
         clean_text = re.sub(r'\s+',' ',clean_text)
-        
+        clean_text=re.sub(r"(?<=\D)\.(?=\S)", ". ", clean_text)
         sentences= nltk.sent_tokenize(clean_text)
         
         word_count=dict()
@@ -127,8 +127,8 @@ def precision_unigrams(ref_sum_list,hyp_sum_list):
             r=nltk.word_tokenize(r)
             h=nltk.word_tokenize(h)
             overlap=0
-            for i in r:
-                if i in h:
+            for i in h:
+                if i in r:
                     overlap+=1
             precision_temp.append(overlap/len(h))
             recall_temp.append(overlap/len(r))
@@ -220,3 +220,9 @@ precision_df=pd.DataFrame((_ for _ in itertools.zip_longest(*precision)), column
 recall_df=pd.DataFrame((_ for _ in itertools.zip_longest(*recall)), columns=['Business', 'Entertainment', 'Politics','Sport','Tech'])
 precision_df.to_csv("precision_df.csv")
 recall_df.to_csv("recall_df.csv")
+
+#saving scores
+import pickle
+
+with open('list_scores.pkl', 'wb') as f:  
+    pickle.dump(scores,f)

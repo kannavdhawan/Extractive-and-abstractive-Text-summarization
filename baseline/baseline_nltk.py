@@ -75,8 +75,10 @@ def set_summaries(all_articles,stop_words,sum_length):
             temp_text_lower= article.lower()
             # clean_text = re.sub(r'\[[0-9]*\]',' ',temp_text_lower)
             # clean_text = re.sub(r'(\n+)','.',temp_text_lower)
-            clean_text = re.sub('[^a-zA-Z0-9.]', ' ', temp_text_lower )  
+            clean_text = re.sub(r'[^a-zA-Z0-9.%,\']', ' ', temp_text_lower)  
             clean_text = re.sub(r'\s+',' ',clean_text)
+            clean_text=re.sub(r"(?<=\D)\.(?=\S)", ". ", clean_text)  # Adding spaces after each sentence completion i.e. after '.'
+
             
             
             word_count=dict()
@@ -92,8 +94,7 @@ def set_summaries(all_articles,stop_words,sum_length):
                 word_count[word]=word_count[word]/maximum
             
             # clean_text=re.sub(r'\w+\\.\w+','\n',clean_text)
-            sentences=re.split('\D\\.\D', clean_text) 
-            # sentences= nltk.sent_tokenize(clean_text)
+            sentences= nltk.sent_tokenize(clean_text)
             
             # print(len(sentences))
             sent_score=dict()
