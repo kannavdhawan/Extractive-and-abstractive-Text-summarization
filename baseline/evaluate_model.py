@@ -155,7 +155,7 @@ def calculate_mean_score_plots(score):
         axs.set_xticks([0,1,2,3,4])
         axs.set_xticklabels(["Business","Entertainment","Politics","Sports","Tech"])
         plt.tight_layout(rect=[0, 0, 1, 0.95])
-        fig1.savefig(os.path.join(metric_str,'_score.png'))
+        fig1.savefig(os.path.join("Plots/",metric_str,'_score.png'))
 
 
 
