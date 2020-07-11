@@ -2,17 +2,17 @@ import os
 import matplotlib.pyplot as plt 
 import pandas as pd 
 import numpy as np 
-
+import seaborn as sns 
 
 # Genrating graphs
 precision_path="precision_df.csv"
 recall_path="recall_df.csv"
 precision_df=pd.read_csv(precision_path).iloc[:,1:]
 recall_df=pd.read_csv(recall_path).iloc[:,1:]
-print("Precision")
-print(precision_df.head())
-print("Recall")
-print(recall_df.head())
+# print("Precision")
+# print(precision_df.head())
+# print("Recall")
+# print(recall_df.head())
 y=pd.DataFrame(np.arange(precision_df.shape[0]))
 
 for metric_str,metric_ob in zip(["Precision","Recall"],[precision_df,recall_df]):
@@ -108,5 +108,66 @@ f_rL_avg_all_topics=average_rouge(f1_rL)
 p_rL_avg_all_topics=average_rouge(p_rL)
 r_rL_avg_all_topics=average_rouge(r_rL)
 
-business_metric_df=pd.DataFrame()
-business_metric_df
+rouge_list=['Rouge 1', 'Rouge 2', 'Rouge L']
+
+f_score=pd.DataFrame([f_r1_avg_all_topics,f_r2_avg_all_topics,f_rL_avg_all_topics],columns=['Business',\
+    'Entertainment','Politics','Sport','Tech'])
+f_score.index = rouge_list
+print(f_score)
+
+p_score=pd.DataFrame([p_r1_avg_all_topics,p_r2_avg_all_topics,p_rL_avg_all_topics],columns=['Business',\
+    'Entertainment','Politics','Sport','Tech'])
+p_score.index = rouge_list
+print(p_score)
+r_score=pd.DataFrame([r_r1_avg_all_topics,r_r2_avg_all_topics,r_rL_avg_all_topics],columns=['Business',\
+    'Entertainment','Politics','Sport','Tech'])
+r_score.index = rouge_list
+print(r_score)
+
+plt.close()
+fig1,axs=plt.subplots(1)
+axs.plot([0,1,2,3,4],f_score.iloc[0,:],'b',label='Rouge-1')
+axs.plot([0,1,2,3,4],f_score.iloc[1,:],'r',label='Rouge-2')
+axs.plot([0,1,2,3,4],f_score.iloc[2,:],'g',label='Rouge-L')
+axs.legend()
+axs.set_title("F-Score for Rouge-1, Rouge-2 and Rouge-L")
+
+
+plt.tight_layout(rect=[0, 0, 1, 0.95])
+
+# sns.lineplot([0,1,2,3,4],f_score.iloc[0,:])
+fig1.savefig('f_score.png')
+
+
+
+plt.close()
+fig2,axs=plt.subplots(1)
+axs.plot([0,1,2,3,4],p_score.iloc[0,:],'b',label='Rouge-1')
+axs.plot([0,1,2,3,4],p_score.iloc[1,:],'r',label='Rouge-2')
+axs.plot([0,1,2,3,4],p_score.iloc[2,:],'g',label='Rouge-L')
+axs.legend()
+axs.set_title("P-Score for Rouge-1, Rouge-2 and Rouge-L")
+
+
+plt.tight_layout(rect=[0, 0, 1, 0.95])
+
+# sns.lineplot([0,1,2,3,4],f_score.iloc[0,:])
+fig2.savefig('p_score.png')
+
+
+
+
+plt.close()
+fig3,axs=plt.subplots(1)
+axs.plot([0,1,2,3,4],r_score.iloc[0,:],'b',label='Rouge-1')
+axs.plot([0,1,2,3,4],r_score.iloc[1,:],'r',label='Rouge-2')
+axs.plot([0,1,2,3,4],r_score.iloc[2,:],'g',label='Rouge-L')
+axs.legend()
+axs.set_title("R-Score for Rouge-1, Rouge-2 and Rouge-L")
+
+
+plt.tight_layout(rect=[0, 0, 1, 0.95])
+
+# sns.lineplot([0,1,2,3,4],f_score.iloc[0,:])
+fig3.savefig('r_score.png')
+
