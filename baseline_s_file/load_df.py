@@ -57,7 +57,6 @@ for metric_str,metric_ob in zip(["Precision","Recall"],[precision_df,recall_df])
         fig.savefig(os.path.join("Recall_nltk.png"))
 
 
-
     
 # Loading scores and calculating mean precision and recall 
 import pickle 
