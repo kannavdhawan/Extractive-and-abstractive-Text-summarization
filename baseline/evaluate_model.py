@@ -140,7 +140,7 @@ def calculate_mean_score_plots(score):
     """
     Generating plots for f-score, p-score and r-score with metric Rouge-1, Rouge-2 and Rouge-L for all of the topics.
     """
-    score_type=zip(["f_score","p_score","r_score"],["F","P","R"])
+    score_type=zip([f_score,p_score,r_score],["F","P","R"])
     for metric,metric_str in score_type:
         plt.close()
         fig1,axs=plt.subplots(1)
