@@ -137,7 +137,27 @@ def calculate_mean_score_plots(score):
     r_score.index = rouge_list
     print(r_score)
 
-    
+    """
+    Generating plots for f-score, p-score and r-score with metric Rouge-1, Rouge-2 and Rouge-L for all of the topics.
+    """
+    score_type=zip(["f_score","p_score","r_score"],["F","P","R"])
+    for metric,metric_str in score_type:
+        plt.close()
+        fig1,axs=plt.subplots(1)
+        axs.plot([0,1,2,3,4],metric.iloc[0,:],'b',label='Rouge-1')
+        axs.plot([0,1,2,3,4],metric.iloc[1,:],'r',label='Rouge-2')
+        axs.plot([0,1,2,3,4],metric.iloc[2,:],'g',label='Rouge-L')
+        axs.legend()
+        title=metric_str+"-Score for Rouge-1, Rouge-2 and Rouge-L"
+        axs.set_title(title)
+        plt.xlabel("Summarized Topics")
+        plt.ylabel("Scores")
+        axs.set_xticks([0,1,2,3,4])
+        axs.set_xticklabels(["Business","Entertainment","Politics","Sports","Tech"])
+        plt.tight_layout(rect=[0, 0, 1, 0.95])
+        fig1.savefig(os.path.join(metric_str,'_score.png'))
+
+
 
 def main(ref_summary_path,hyp_summary_path):
     precision,recall,scores=rouge_scores.main(ref_summary_path,hyp_summary_path)
