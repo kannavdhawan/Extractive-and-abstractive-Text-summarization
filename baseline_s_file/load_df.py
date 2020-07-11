@@ -170,4 +170,3 @@ plt.tight_layout(rect=[0, 0, 1, 0.95])
 
 # sns.lineplot([0,1,2,3,4],f_score.iloc[0,:])
 fig3.savefig('r_score.png')
-
