@@ -155,12 +155,15 @@ def calculate_mean_score_plots(score):
         axs.set_xticks([0,1,2,3,4])
         axs.set_xticklabels(["Business","Entertainment","Politics","Sports","Tech"])
         plt.tight_layout(rect=[0, 0, 1, 0.95])
-        fig1.savefig(os.path.join("Plots/",metric_str,'_score.png'))
+        filename=metric_str+"_score.png"
+        fig1.savefig(os.path.join("Plots/",filename))
 
 
 
 def main(ref_summary_path,hyp_summary_path):
     precision,recall,scores=rouge_scores.main(ref_summary_path,hyp_summary_path)
+    if not os.path.exists(os.path.join("Data_files/")):
+        os.makedirs(os.path.join("Data_files/"))
     with open(os.path.join("Data_files/","list_scores.pkl"),'wb') as f: 
         pickle.dump(scores,f)
     #unigram
@@ -169,8 +172,7 @@ def main(ref_summary_path,hyp_summary_path):
    
     precision_path=os.path.join('Data_files/','precision_nltk.csv')
     recall_path=os.path.join('Data_files/','recall_nltk.csv')
-    if not os.path.exists(os.path.join("Data_files/")):
-        os.makedirs(os.path.join("Data_files/"))
+    
     
     precision_df.to_csv(precision_path)
     recall_df.to_csv(recall_path)
