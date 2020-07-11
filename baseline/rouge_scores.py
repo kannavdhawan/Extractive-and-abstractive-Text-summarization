@@ -2,6 +2,9 @@ from rouge import FilesRouge
 import os
 from baseline_nltk import files_read,get_filenames,read_text
 import nltk
+
+nltk.download('punkt')
+nltk.download('stopwords')
 """
 ROUGE-n recall=40% means that 40% of the n-grams in the reference summary are also present in the generated summary.
 ROUGE-n precision=40% means that 40% of the n-grams in the generated summary are also present in the reference summary.
@@ -18,8 +21,8 @@ def precision_unigrams(ref_sum_list,hyp_sum_list):
             r=nltk.word_tokenize(r)
             h=nltk.word_tokenize(h)
             overlap=0
-            for i in r:
-                if i in h:
+            for i in h:
+                if i in r:
                     overlap+=1
             precision_temp.append(overlap/len(h))
             recall_temp.append(overlap/len(r))

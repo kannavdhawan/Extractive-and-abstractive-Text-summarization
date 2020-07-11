@@ -11,6 +11,7 @@ def files_read(path):
     filenames.sort()
     files_per_topic=filenames
     return files_per_topic
+
 def get_filenames(get_files=True):
     if True:
         all_file_names=[]
@@ -42,6 +43,7 @@ def read_text(all_file_names,root_path,testing_flag):
         for j in all_file_names[i]:
             with open(os.path.join(root_path,topic,j),'rb') as f:                   #converted into bytes because of non ascii 
                 data=f.read() 
+                # print(len(nltk.sent_tokenize(data)))
                 f.close()
                 if testing_flag==False or testing_flag==True:
                     soup=bs.BeautifulSoup(data,'lxml')
@@ -49,6 +51,13 @@ def read_text(all_file_names,root_path,testing_flag):
                     for paragraph in soup.find_all('p'):
                         text += paragraph.text
                     data=text
+            # # print(data)
+            # print(len(nltk.sent_tokenize(data)))
+            # print(nltk.sent_tokenize(data))
+                
+            # break
+        
+            # print(len(nltk.sent_tokenize(data)))
             art_per_topic.append(data)
             # print(True)
         all_articles.append(art_per_topic)
@@ -69,7 +78,6 @@ def set_summaries(all_articles,stop_words,sum_length):
             clean_text = re.sub('[^a-zA-Z0-9.]', ' ', temp_text_lower )  
             clean_text = re.sub(r'\s+',' ',clean_text)
             
-            sentences= nltk.sent_tokenize(clean_text)
             
             word_count=dict()
             tokenized_words=nltk.word_tokenize(clean_text)
@@ -82,7 +90,9 @@ def set_summaries(all_articles,stop_words,sum_length):
             maximum=max(word_count.values())
             for word in word_count.keys():
                 word_count[word]=word_count[word]/maximum
-
+            
+            sentences= nltk.sent_tokenize(clean_text)
+            print(len(sentences))
             sent_score=dict()
             for sent in sentences:      
                 tokens_per_sent=nltk.word_tokenize(sent)   
