@@ -5,9 +5,13 @@ import re
 import nltk 
 import heapq
 
+
+
+print("import * read l 1w")
+
 def files_read(path):
-    print("Reading files..")
-    _, _, filenames = next(walk(path), (None, None, []))
+    print(f"Reading {path} files..")
+    _, _, filenames = next(walk(path), (None, None, []))   # walk --> (current_path, directories in current_path, files in current_path).
     filenames.sort()
     files_per_topic=filenames
     return files_per_topic
@@ -79,8 +83,6 @@ def set_summaries(all_articles,stop_words,sum_length):
             clean_text = re.sub(r'\s+',' ',clean_text)
             clean_text=re.sub(r"(?<=\D)\.(?=\S)", ". ", clean_text)  # Adding spaces after each sentence completion i.e. after '.'
 
-            
-            
             word_count=dict()
             tokenized_words=nltk.word_tokenize(clean_text)
             for word in tokenized_words:

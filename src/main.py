@@ -9,7 +9,6 @@ import sys
 from os import walk
 from baseline_nltk import *
 
-
 nltk.download('punkt')
 nltk.download('stopwords')
 stop_words = nltk.corpus.stopwords.words('english')
