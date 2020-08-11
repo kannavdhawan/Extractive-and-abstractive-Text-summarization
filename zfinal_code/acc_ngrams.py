@@ -1,5 +1,6 @@
 import os
 import nltk
+nltk.download('punkt')
 with open(os.path.join('Nltk_summaries/business/','001.txt')) as f:
     gen_sum=f.read()
     gen_sum=nltk.word_tokenize(gen_sum)
@@ -19,3 +20,4 @@ for i in gen_sum:
 print("overlap: ",overlap)
 print("len of generated summ: ",len(gen_sum))
 print("precision: ",overlap/len(gen_sum))
+print("recall: ",overlap/len(real_sum))
