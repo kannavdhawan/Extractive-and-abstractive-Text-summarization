@@ -45,10 +45,14 @@ def generate_imgs(precision_path,recall_path):
                 axs[2,0].plot(metric_ob[[i]])
                 axs[2,0].grid()
                 axs[2,0].set_title('Tech Summaries')
+
+            # fig.delaxes(axs[2][1])
+            axs[2,1].set_axis_off()
+
         if metric_str=="Precision":
-            plt.suptitle('Nltk Precision')
+            plt.suptitle('Baseline metric of mean Precision for all summaries')
         else:
-            plt.suptitle('Nltk Recall')
+            plt.suptitle('Baseline metric of mean Recall for all summaries')
         plt.tight_layout(rect=[0, 0, 1, 0.95])
 
         plot_path=os.path.join("Plots/")
@@ -157,8 +161,6 @@ def calculate_mean_score_plots(score):
         plt.tight_layout(rect=[0, 0, 1, 0.95])
         filename=metric_str+"_score.png"
         fig1.savefig(os.path.join("Plots/",filename))
-
-
 
 def main(ref_summary_path,hyp_summary_path):
     precision,recall,scores=rouge_scores.main(ref_summary_path,hyp_summary_path)
