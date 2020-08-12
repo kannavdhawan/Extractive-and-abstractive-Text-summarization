@@ -171,7 +171,7 @@ def main(ref_summary_path,hyp_summary_path):
     #unigram
     precision_df=pd.DataFrame((_ for _ in itertools.zip_longest(*precision)), columns=['Business', 'Entertainment', 'Politics','Sport','Tech'])
     recall_df=pd.DataFrame((_ for _ in itertools.zip_longest(*recall)), columns=['Business', 'Entertainment', 'Politics','Sport','Tech'])
-   
+    
     precision_path=os.path.join('Data_files/','precision_nltk.csv')
     recall_path=os.path.join('Data_files/','recall_nltk.csv')
     
