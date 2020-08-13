@@ -58,6 +58,8 @@ def rouge_fpr(all_file_names,ref_summary_path,hyp_summary_path):
         count+=1
         tmp=[]
         for r,h in zip(ref,hyp):
+            # print()
+            print(topic, r)
             # print(os.path.join(ref_summary_path,topic,r))
             tmp.append(files_rouge.get_scores(os.path.join(ref_summary_path,topic,r),os.path.join(hyp_summary_path,topic,h),avg=True))
         scores.append(tmp)

@@ -47,3 +47,16 @@ Adding space after the full stop.
 # s = "Text.Text2.Text3."
 # result = re.sub(r"(?<=\D)\.(?=\S)", ". ", s)
 # print(result)
+
+
+# def line_count(path):
+#     count = 0
+#     with open(path, "rb") as f:
+#         for line in f:
+#             count += 1
+#     return count
+
+# hyp_lc = line_count('TextRank_summaries/tech/005.txt')
+# ref_lc = line_count('bbc_news_corpus/Summaries/business/001.txt')
+# print(hyp_lc)
+# print(ref_lc)

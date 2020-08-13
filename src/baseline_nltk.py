@@ -5,8 +5,6 @@ import re
 import nltk 
 import heapq
 
-
-
 print("import * read l 1w")
 
 def files_read(path):
