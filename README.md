@@ -17,5 +17,5 @@ This dataset was used for data categorization that onsists of 2225 documents fro
 
 |Gold Summary | Real | T5 | LSTM(GloVe) | LSTM(FastText) |
 |----|--|--|--|--|
-|full bodied coffee|0.35|0|0.7|0.8|
-|Best GF pasta on the market!|1.0|0.4|1.0|1.0
+|"full bodied coffee"|0.35|0|0.7|0.8|
+|"Best GF pasta on the market!"|1.0|0.4|1.0|1.0
