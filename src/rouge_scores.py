@@ -61,6 +61,7 @@ def rouge_fpr(all_file_names,ref_summary_path,hyp_summary_path):
             # print()
             print(topic, r)
             # print(os.path.join(ref_summary_path,topic,r))
+            # !!!!!! Hyp summary, Ref summary is the correct format in documentation !!!!!!!!!!!!!!!!!!!!!!!
             tmp.append(files_rouge.get_scores(os.path.join(ref_summary_path,topic,r),os.path.join(hyp_summary_path,topic,h),avg=True))
         scores.append(tmp)
         

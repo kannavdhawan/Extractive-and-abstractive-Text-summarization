@@ -63,6 +63,5 @@ Adding space after the full stop.
 from rouge import FilesRouge
 import os 
 files_rouge = FilesRouge()
-scores= files_rouge.get_scores(os.path.join('bbc_news_corpus/Summaries',
-            'business','001.txt'),os.path.join('ensemble.txt'),avg=True)
+scores= files_rouge.get_scores(os.path.join('hyp_lstm_fast.txt'),os.path.join('ref_lstm.txt'),avg=True)
 print(scores) 
