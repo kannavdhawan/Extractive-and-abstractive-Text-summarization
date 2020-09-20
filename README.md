@@ -24,5 +24,5 @@ This dataset was used for data categorization that onsists of 2225 documents fro
 
 
 
-
+## For Detailed Results, Please refer research paper.
 
